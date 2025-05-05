@@ -1,3 +1,15 @@
 #search_form {
     height: 50px;
 }
+
+#next_btn {
+    height: 50px;
+}
+
+#prev_btn {
+    height: 50px;
+}
+
+#dog_list {
+    height: 30px;
+}
