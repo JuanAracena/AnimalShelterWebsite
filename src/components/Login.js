@@ -52,17 +52,21 @@ function Login() {
 
     return (
         <div id="Login_bg">
-            <form id="login_form" onSubmit={handleSubmit}>
-                <label id="name_label" for="name">Name: </label>
-                <input id="name" type="text"></input>
-                <label id="email_label" for="email"> Email: </label>
-                <input id="email" type="email"></input>
-                <br></br>
-                <button id="login_btn" type="submit">Login</button>
-            </form>
-            {showError === true && (
-                <p id= "error_msg">Login error: Please enter a name and email.</p>
-            )}          
+            <div id="login_div">
+                <h1 id="login_title">Login</h1>
+                <form id="login_form" onSubmit={handleSubmit}>
+                    <label id="name_label" for="name">Name: </label>
+                    <input id="name" type="text"></input>
+                    <label id="email_label" for="email"> Email: </label>
+                    <input id="email" type="email"></input>
+                    <br></br>
+                    <button id="login_btn" type="submit">Login</button>
+                </form>
+                {showError === true && (
+                    <p id= "error_msg">Login error: Please enter a name and email.</p>
+                )}       
+            </div>
+               
         </div>
     );
 
