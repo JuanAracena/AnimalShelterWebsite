@@ -1,8 +1,20 @@
+#login_bg {
+    background-color: beige;
+}
+
 #login_div {
     display: grid;
     grid-template-rows: 50px 130px 50px;
     margin-left: 20px;
+    margin-right: 20px;
+    height: fit-content;
+    background-color: #ECE7CA;
+    border-radius: 20px;
 
+}
+
+#login_title {
+    padding-left: 20px;
 }
 
 #login_form {
@@ -18,4 +30,30 @@
     width: fit-content;
     padding-left: 10px;
     padding-right: 10px;
+}
+
+#logo_div {
+    height: fit-content;
+}
+
+#logo {
+    width: 50px;
+    height: 50px;
+    padding-top: 10px;
+    padding-left: 10px;
+}
+
+#links {
+    height: fit-content;
+    width: fit-content;
+    margin: auto;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+a:hover {
+    color: blue;
 }

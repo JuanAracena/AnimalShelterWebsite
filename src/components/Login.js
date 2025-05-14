@@ -52,6 +52,9 @@ function Login() {
 
     return (
         <div id="Login_bg">
+            <div id="logo_div">
+                <img id="logo" src="design.png" alt="Fetch company logo"></img>
+            </div>
             <div id="login_div">
                 <h1 id="login_title">Login</h1>
                 <form id="login_form" onSubmit={handleSubmit}>
@@ -65,6 +68,11 @@ function Login() {
                 {showError === true && (
                     <p id= "error_msg">Login error: Please enter a name and email.</p>
                 )}       
+            </div>
+            <div id="links">
+                <a id="blog" href="https://fetch.com/blog">Blog   </a>{"|"}
+                <a id="contact" href="https://help.fetch.com/hc/en-us">  Contact Support   </a>{"|"}
+                <a id="news" href="https://business.fetch.com/newsroom">  Newsroom</a>
             </div>
                
         </div>
