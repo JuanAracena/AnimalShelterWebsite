@@ -121,16 +121,29 @@ function Search() {
 
     return (
         <div id="search_bg">
-            <form id="search_form" onSubmit={handleSearch}>
-                <label id="breed_label" for="breed">Breed: </label>
-                <select name="Breed" id="breed">    
-                    <option value="">Select a breed</option>
-                    {breedOptions.map((breed, index) => {
-                        return <option key={index} value={breed}>{breed}</option>
-                    })}
-                </select>
+            <div id="logo_div">
+                <img id="logo" src="design.png" alt="Fetch company logo"></img>
+            </div>
+            <div id="filter_div">
+                <h1 id="filter_title">Filters</h1>
+                <form id="search_form" onSubmit={handleSearch}>
+                    <label id="breed_label" for="breed">Breed: </label>
+                    <select name="Breed" id="breed">    
+                        <option value="">Select a breed</option>
+                        {breedOptions.map((breed, index) => {
+                            return <option key={index} value={breed}>{breed}</option>
+                        })}
+                    </select>
+                    <label id="zipcode_label" for="zipcode">ZIP code: </label>
+                    <input id="zipcode" type="text"></input>
+                    <label id="agemin_label" for="agemin">Minimum age: </label>
+                    <input id="agemin" type="text"></input>
+                    <label id="agemax_label" for="agemax">Maximum age: </label>
+                    <input id="agemax" type="text"></input>
                 <button id="submit_btn" type="submit">Search</button>
-            </form>
+                </form>
+            </div>
+            
             
             <div id="display_dogs">
                 <ol id="dog_list" type="A">
@@ -149,8 +162,11 @@ function Search() {
                 </ol>
             </div>
 
-            <button id="next_btn" onClick={navigatePages(nextUrl)}>Next</button>
-            <button id="prev_btn" onClick={navigatePages(prevUrl)}>Previous</button>
+            <div id="btn_div">
+                <button id="next_btn" onClick={navigatePages(nextUrl)}>Next</button>
+                <button id="prev_btn" onClick={navigatePages(prevUrl)}>Previous</button>
+            </div>
+            
         </div>
     )
 

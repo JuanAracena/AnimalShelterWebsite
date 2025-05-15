@@ -1,5 +1,20 @@
+#search_bg {
+    background-color: beige;
+    display: grid;
+    grid-template-rows: 15% 20% 50% 15%;
+
+}
+
+#filter_div {
+    height: fit-content;
+}
+
+#filter_title {
+    height: fit-content;
+}
+
 #search_form {
-    height: 50px;
+    height: fit-content;
 }
 
 #next_btn {

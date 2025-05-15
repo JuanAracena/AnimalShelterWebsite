@@ -51,7 +51,7 @@ function Login() {
     };
 
     return (
-        <div id="Login_bg">
+        <div id="login_bg">
             <div id="logo_div">
                 <img id="logo" src="design.png" alt="Fetch company logo"></img>
             </div>

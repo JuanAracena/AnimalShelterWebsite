@@ -1,5 +1,7 @@
 #login_bg {
     background-color: beige;
+    display: grid;
+    grid-template-rows: 15% 50% 35%;
 }
 
 #login_div {
@@ -10,11 +12,14 @@
     height: fit-content;
     background-color: #ECE7CA;
     border-radius: 20px;
+    place-self: center;
+    padding-top: 15px;
 
 }
 
 #login_title {
     padding-left: 20px;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #login_form {
@@ -24,6 +29,15 @@
     grid-row-gap: 15px;
     margin-right: 30px;
     margin-left: 30px;
+    margin-top: 17px;
+}
+
+#name_label {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#email_label {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #login_btn {
@@ -52,6 +66,7 @@
 a {
     text-decoration: none;
     color: black;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 a:hover {
