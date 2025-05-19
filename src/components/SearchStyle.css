@@ -1,20 +1,33 @@
 #search_bg {
     background-color: beige;
     display: grid;
-    grid-template-rows: 15% 20% 50% 15%;
+    grid-template-rows: 15% 40% 35% 10%;
 
 }
 
 #filter_div {
     height: fit-content;
+    display: grid;
+    grid-template-rows: 50px 175px;
+    background-color: #ECE7CA;
+    margin-left: 20px;
+    place-self: start;
+    border-radius: 22px;
 }
 
 #filter_title {
     height: fit-content;
+    margin-left: 15px;
 }
 
 #search_form {
     height: fit-content;
+    display: grid;
+    grid-template-columns: 125px 200px;
+    grid-template-rows: 25px 25px 25px 25px 25px;
+    padding-right: 40px;
+    grid-gap: 10px;
+    margin-left: 35px;
 }
 
 #next_btn {
