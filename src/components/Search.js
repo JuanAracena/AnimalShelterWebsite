@@ -146,25 +146,38 @@ function Search() {
             
             
             <div id="display_dogs">
-                <ol id="dog_list" type="A">
+                <ul id="dog_list" type="none">
                     {dogDetails.map((dog, index) => {
-                        return <li id="dog_il" key={index}>
-                            <div>
-                                <p>{dog["name"]}</p>
-                                {/* <p>{dog["img"]}</p>
-                                <p>{dog["age"]}</p>
-                                <p>{dog["breed"]}</p>
-                                <p>{dog["zip_code"]}</p> */}
+                        return <li id="dog_li" key={index}>
+                            <div id="li_div">
+                                <img src={dog["img"]}></img>
+                                <p>Name: {dog["name"]}</p>
+                                <p>Age: {dog["age"]}</p>
+                                <p>Breed: {dog["breed"]}</p>
+                                <p>ZIP: {dog["zip_code"]}</p>
+                                <button id="li_btn">Add to Favorites</button>
 
                             </div>
                         </li>
                     })}
-                </ol>
+                </ul>
             </div>
 
             <div id="btn_div">
-                <button id="next_btn" onClick={navigatePages(nextUrl)}>Next</button>
-                <button id="prev_btn" onClick={navigatePages(prevUrl)}>Previous</button>
+                <ul id="btn_ul">
+                    <button id="next_btn" onClick={navigatePages(nextUrl)}>Next</button>
+                    <button id="prev_btn" onClick={navigatePages(prevUrl)}>Previous</button>
+                </ul>
+            </div>
+
+            <div id="match_div">
+                <button id="match_btn">Find your Match</button>
+            </div>
+
+            <div id="links">
+                <a id="blog" href="https://fetch.com/blog">Blog   </a>{"|"}
+                <a id="contact" href="https://help.fetch.com/hc/en-us">  Contact Support   </a>{"|"}
+                <a id="news" href="https://business.fetch.com/newsroom">  Newsroom</a>
             </div>
             
         </div>

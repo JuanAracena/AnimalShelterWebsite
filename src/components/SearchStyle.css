@@ -1,7 +1,8 @@
 #search_bg {
     background-color: beige;
     display: grid;
-    grid-template-rows: 15% 40% 35% 10%;
+    grid-template-rows: 70px 225px auto 50px 85px 100px;
+    height: auto;
 
 }
 
@@ -11,7 +12,7 @@
     grid-template-rows: 50px 175px;
     background-color: #ECE7CA;
     margin-left: 20px;
-    place-self: start;
+    justify-self: center;
     border-radius: 22px;
 }
 
@@ -30,14 +31,89 @@
     margin-left: 35px;
 }
 
-#next_btn {
-    height: 50px;
-}
-
-#prev_btn {
-    height: 50px;
+#display_dogs {
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    height: auto;
 }
 
 #dog_list {
-    height: 30px;
+    display: grid;
+    grid-template-rows: repeat(25, 150px);
+    height: fit-content;
+    justify-items: center;
+}
+
+#li_div {
+    display: grid;
+    grid-template-columns: 228px auto;
+    grid-template-rows: 25px 25px 25px 25px 38px;
+    
+}
+
+#li_div img{
+    grid-row-start: 1;
+    grid-row-end: 6;
+    border-radius: 20px;
+    justify-self: center;
+}
+
+#li_div p {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#li_btn {
+    margin-right: 20px;
+    margin-left: 20px;
+    width: 135px;
+}
+
+#btn_ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 80px 80px;
+    grid-gap: 20px;
+    justify-content: end;
+    margin-right: 20px;
+
+}
+
+#next_btn {
+    height: fit-content;
+}
+
+#prev_btn {
+    height: fit-content;
+}
+
+#match_div {
+    place-self: center;
+}
+
+#match_btn {
+    height: 45px;
+    width:135px;
+    margin-top: 18px;
+}
+
+label {
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+button {
+     font-family: Arial, Helvetica, sans-serif;
+
+}
+
+input {
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+select {
+    font-family: Arial, Helvetica, sans-serif;
+
 }
