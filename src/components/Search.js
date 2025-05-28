@@ -22,18 +22,38 @@ function Search() {
     //API call for getting list of breeds
     useEffect(() => {
 
-        fetch(`https://frontend-take-home-service.fetch.com/dogs/breeds`, {
+        const fetchBreeds = () => {
+            fetch(`https://frontend-take-home-service.fetch.com/dogs/breeds`, {
             method: "GET",
             credentials: "include"
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data);
-            setBreedOptions(data);
-        })
-        .catch((err) => {
-            console.error("Error: ", err);
-        });
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                setBreedOptions(data);
+            })
+            .catch((err) => {
+                console.error("Error: ", err);
+            });
+
+        }
+
+
+
+        fetchBreeds();
+
+        const interval = setInterval(fetchBreeds, 5000);
+
+        const timeout = setTimeout(() => {
+            clearInterval(interval);
+            console.log("Interval stopped");
+        }, 5000);
+
+        return () => {
+            clearInterval(interval);
+            clearTimeout(timeout);
+        }
+        
 
     }, [])
 
@@ -44,10 +64,20 @@ function Search() {
             const breed = event.target.breed.value;
             console.log("Breed from const variable: ", breed);
 
+            const zip = event.target.zipcode.value;
+            console.log("Zipcode from const variable: ", zip);
+
+            const minAge = event.target.agemin.value;
+            console.log("Minimum age from const variable: ", minAge)
+
+            const maxAge = event.target.agemax.value;
+            console.log("Maximum age from const variable: ", maxAge);
+
             //Checks if the user selected a breed and searches for IDs that match the given breed
             //Otherwise, it searches the IDs of all dogs
-            if(breed) {
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?${breed}`, {
+            if(breed && zip && minAge && maxAge){
+                
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&zipCodes=${zip}&ageMin=${minAge}&ageMax=${maxAge}`, {
                     method: "GET",
                     credentials: "include",
 
@@ -55,7 +85,177 @@ function Search() {
                 .then((response) => response.json())
                 .then((data) => {                    
                     setResultsData(data);
-                    console.log("Results inside if statement", resultsData);
+                    console.log("Results inside if(all filters) statement", resultsData);
+
+                })
+            }else if(breed && zip && minAge){
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&zipCodes=${zip}&ageMin=${minAge}`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                .then((response) => response.json())
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results inside if(breed && zip && minAge) statement", resultsData);
+
+                })
+            }else if(breed && zip && maxAge){
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&zipCodes=${zip}&ageMax=${maxAge}`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                .then((response) => response.json())
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results inside if(breed && zip && maxAge) statement", resultsData);
+
+                })
+            }else if (zip && minAge && maxAge){
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?zipCodes=${zip}&ageMin=${minAge}&ageMax=${maxAge}`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                .then((response) => response.json())
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results inside if(zip && minAge && maxAge) statement", resultsData);
+
+                })
+            }else if(breed && minAge && maxAge){
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&ageMin=${minAge}&ageMax=${maxAge}`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                .then((response) => response.json())
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results inside if(breed && minAge && maxAge) statement", resultsData);
+
+                })
+            }else if(breed && zip){
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&zipCodes=${zip}`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                .then((response) => response.json())
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results inside if(breed && zip) statement", resultsData);
+
+                })
+            }else if(breed && minAge){
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&ageMin=${minAge}`, {
+                        method: "GET",
+                        credentials: "include",
+
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {                    
+                        setResultsData(data);
+                        console.log("Results inside if(breed && minAge) statement", resultsData);
+
+                    })
+            
+                    
+            }else if(breed && maxAge){
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&ageMax=${maxAge}`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                .then((response) => response.json())
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results inside if(breed && maxAge) statement", resultsData);
+
+                })
+            }else if(zip && minAge){
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?zipCodes=${zip}&ageMin=${minAge}`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                .then((response) => response.json())
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results inside if(zip && minAge) statement", resultsData);
+
+                })
+            }else if(zip && maxAge){
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?zipCodes=${zip}&ageMax=${maxAge}`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                .then((response) => response.json())
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results inside if(zip and maxAge) statement", resultsData);
+
+                })
+            }else if(minAge && maxAge){
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?ageMin=${minAge}&ageMax=${maxAge}`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                .then((response) => response.json())
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results inside if(minAge && maxAge) statement", resultsData);
+
+                })
+            }else if(breed) {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                .then((response) => response.json())
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results inside if(breed) statement", resultsData);
+
+                })
+            }else if(zip) {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?zipCodes=${zip}`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                .then((response) => response.json())
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results inside if(zip) statement", resultsData);
+
+                })
+            }else if(minAge){
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?ageMin=${minAge}`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                .then((response) => response.json())
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results inside if(minAge) statement", resultsData);
+
+                })
+            }else if (maxAge){
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?ageMax=${maxAge}`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                .then((response) => response.json())
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results inside if(maxAge) statement", resultsData);
 
                 })
             }else {
