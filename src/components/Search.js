@@ -19,6 +19,7 @@ function Search() {
     const [prevUrl, setPrevUrl] = useState("");
 
 
+
     //API call for getting list of breeds
     useEffect(() => {
 
@@ -42,12 +43,12 @@ function Search() {
 
         fetchBreeds();
 
-        const interval = setInterval(fetchBreeds, 5000);
+        const interval = setInterval(fetchBreeds, 1000);
 
         const timeout = setTimeout(() => {
             clearInterval(interval);
             console.log("Interval stopped");
-        }, 5000);
+        }, 1000);
 
         return () => {
             clearInterval(interval);
@@ -77,7 +78,7 @@ function Search() {
             //Otherwise, it searches the IDs of all dogs
             if(breed && zip && minAge && maxAge){
                 
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&zipCodes=${zip}&ageMin=${minAge}&ageMax=${maxAge}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&zipCodes=${zip}&ageMin=${minAge}&ageMax=${maxAge}&sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
 
@@ -89,7 +90,7 @@ function Search() {
 
                 })
             }else if(breed && zip && minAge){
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&zipCodes=${zip}&ageMin=${minAge}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&zipCodes=${zip}&ageMin=${minAge}&sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
 
@@ -101,7 +102,7 @@ function Search() {
 
                 })
             }else if(breed && zip && maxAge){
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&zipCodes=${zip}&ageMax=${maxAge}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&zipCodes=${zip}&ageMax=${maxAge}&sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
 
@@ -113,7 +114,7 @@ function Search() {
 
                 })
             }else if (zip && minAge && maxAge){
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?zipCodes=${zip}&ageMin=${minAge}&ageMax=${maxAge}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?zipCodes=${zip}&ageMin=${minAge}&ageMax=${maxAge}&sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
 
@@ -125,7 +126,7 @@ function Search() {
 
                 })
             }else if(breed && minAge && maxAge){
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&ageMin=${minAge}&ageMax=${maxAge}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&ageMin=${minAge}&ageMax=${maxAge}&sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
 
@@ -137,7 +138,7 @@ function Search() {
 
                 })
             }else if(breed && zip){
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&zipCodes=${zip}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&zipCodes=${zip}&sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
 
@@ -149,7 +150,7 @@ function Search() {
 
                 })
             }else if(breed && minAge){
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&ageMin=${minAge}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&ageMin=${minAge}&sort=breed:asc`, {
                         method: "GET",
                         credentials: "include",
 
@@ -163,7 +164,7 @@ function Search() {
             
                     
             }else if(breed && maxAge){
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&ageMax=${maxAge}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&ageMax=${maxAge}&sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
 
@@ -175,7 +176,7 @@ function Search() {
 
                 })
             }else if(zip && minAge){
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?zipCodes=${zip}&ageMin=${minAge}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?zipCodes=${zip}&ageMin=${minAge}&sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
 
@@ -187,7 +188,7 @@ function Search() {
 
                 })
             }else if(zip && maxAge){
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?zipCodes=${zip}&ageMax=${maxAge}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?zipCodes=${zip}&ageMax=${maxAge}&sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
 
@@ -199,7 +200,7 @@ function Search() {
 
                 })
             }else if(minAge && maxAge){
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?ageMin=${minAge}&ageMax=${maxAge}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?ageMin=${minAge}&ageMax=${maxAge}&sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
 
@@ -211,7 +212,7 @@ function Search() {
 
                 })
             }else if(breed) {
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?breeds=${breed}&sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
 
@@ -223,7 +224,7 @@ function Search() {
 
                 })
             }else if(zip) {
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?zipCodes=${zip}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?zipCodes=${zip}&sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
 
@@ -235,7 +236,7 @@ function Search() {
 
                 })
             }else if(minAge){
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?ageMin=${minAge}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?ageMin=${minAge}&sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
 
@@ -247,7 +248,7 @@ function Search() {
 
                 })
             }else if (maxAge){
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?ageMax=${maxAge}`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?ageMax=${maxAge}&sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
 
@@ -260,7 +261,7 @@ function Search() {
                 })
             }else {
                 console.log("Else Statement");
-                fetch(`https://frontend-take-home-service.fetch.com/dogs/search`, {
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/search?sort=breed:asc`, {
                     method: "GET",
                     credentials: "include",
                 })
@@ -277,6 +278,12 @@ function Search() {
         }
         
     }
+
+    const handleSort = (event) => {
+        
+    }
+
+    
 
     //Hook that paginates results and sets the url for the next and previous pages
     useEffect(() => {
@@ -343,9 +350,31 @@ function Search() {
                 <button id="submit_btn" type="submit">Search</button>
                 </form>
             </div>
+
+            <div id="sort_div">
+                <h3 id="sort_title">Sort</h3>
+                <form id="sort_form" onSubmit={handleSort}>
+                    <label id="sort_breed_label" for="sort_breed">Breed</label>
+                    <input id="sort_breed" type="radio" name="sortOption" value="breed"></input>
+                    
+                    <label id="sort_name_label" for="sort_name">Name</label>
+                    <input id="sort_name" type="radio" name="sortOption" value="name"></input>
+                    
+                    <label id="sort_age_label" for="sort_age">Age</label>
+                    <input id="sort_age" type="radio" name="sortOption" value="age"></input>
+                    
+                    <label id="asc_label" for="asc_option">Ascending</label>
+                    <input id="sort_asc" type="radio" name="sortOrder" value="asc"></input>
+                    
+                    <label id="desc_label" for="desc_option">Descending</label>
+                    <input id="sort_desc" type="radio" name="sortOrder" value="desc"></input>                 
+                <button id="sort_btn" type="submit">Sort</button>
+                </form>
+            </div>
             
             
             <div id="display_dogs">
+                
                 <ul id="dog_list" type="none">
                     {dogDetails.map((dog, index) => {
                         return <li id="dog_li" key={index}>
