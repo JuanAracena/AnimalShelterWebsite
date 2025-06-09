@@ -11,6 +11,8 @@ function Search() {
     //State for displaying the breed options
     const [breedOptions, setBreedOptions] = useState([]);
 
+    const [resultsUrl, setResultsUrl] = useState("");
+
     const [resultsData, setResultsData] = useState();
 
     const [dogDetails, setDogDetails] = useState([]);
@@ -83,7 +85,11 @@ function Search() {
                     credentials: "include",
 
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {                    
                     setResultsData(data);
                     console.log("Results inside if(all filters) statement", resultsData);
@@ -95,7 +101,11 @@ function Search() {
                     credentials: "include",
 
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {                    
                     setResultsData(data);
                     console.log("Results inside if(breed && zip && minAge) statement", resultsData);
@@ -107,7 +117,11 @@ function Search() {
                     credentials: "include",
 
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {                    
                     setResultsData(data);
                     console.log("Results inside if(breed && zip && maxAge) statement", resultsData);
@@ -119,7 +133,11 @@ function Search() {
                     credentials: "include",
 
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {                    
                     setResultsData(data);
                     console.log("Results inside if(zip && minAge && maxAge) statement", resultsData);
@@ -131,7 +149,11 @@ function Search() {
                     credentials: "include",
 
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {                    
                     setResultsData(data);
                     console.log("Results inside if(breed && minAge && maxAge) statement", resultsData);
@@ -143,7 +165,11 @@ function Search() {
                     credentials: "include",
 
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {                    
                     setResultsData(data);
                     console.log("Results inside if(breed && zip) statement", resultsData);
@@ -155,7 +181,11 @@ function Search() {
                         credentials: "include",
 
                     })
-                    .then((response) => response.json())
+                    .then((response) => {
+                        setResultsUrl(response.url);
+                        return response.json();
+                    
+                    })
                     .then((data) => {                    
                         setResultsData(data);
                         console.log("Results inside if(breed && minAge) statement", resultsData);
@@ -169,7 +199,11 @@ function Search() {
                     credentials: "include",
 
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {                    
                     setResultsData(data);
                     console.log("Results inside if(breed && maxAge) statement", resultsData);
@@ -181,7 +215,11 @@ function Search() {
                     credentials: "include",
 
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {                    
                     setResultsData(data);
                     console.log("Results inside if(zip && minAge) statement", resultsData);
@@ -193,7 +231,11 @@ function Search() {
                     credentials: "include",
 
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {                    
                     setResultsData(data);
                     console.log("Results inside if(zip and maxAge) statement", resultsData);
@@ -205,7 +247,11 @@ function Search() {
                     credentials: "include",
 
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {                    
                     setResultsData(data);
                     console.log("Results inside if(minAge && maxAge) statement", resultsData);
@@ -217,7 +263,11 @@ function Search() {
                     credentials: "include",
 
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {                    
                     setResultsData(data);
                     console.log("Results inside if(breed) statement", resultsData);
@@ -229,7 +279,11 @@ function Search() {
                     credentials: "include",
 
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {                    
                     setResultsData(data);
                     console.log("Results inside if(zip) statement", resultsData);
@@ -241,7 +295,11 @@ function Search() {
                     credentials: "include",
 
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {                    
                     setResultsData(data);
                     console.log("Results inside if(minAge) statement", resultsData);
@@ -253,7 +311,11 @@ function Search() {
                     credentials: "include",
 
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {                    
                     setResultsData(data);
                     console.log("Results inside if(maxAge) statement", resultsData);
@@ -265,7 +327,11 @@ function Search() {
                     method: "GET",
                     credentials: "include",
                 })
-                .then((response) => response.json())
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
                 .then((data) => {
                     setResultsData(data);
                     console.log("Results inside else statement", resultsData);
@@ -274,13 +340,161 @@ function Search() {
 
 
         }catch (error) {
-            console.error("Error occurred while seraching", error);
+            console.error("Error occurred while searching", error);
         }
         
     }
 
     const handleSort = (event) => {
+        event.preventDefault();
+        console.log("Url that's going to be used to order the data: ", resultsUrl);
+
+        const sortBreed = event.target.sort_breed.checked;
+        const sortName = event.target.sort_name.checked;
+        const sortAge = event.target.sort_age.checked;
+
+        const sortAsc = event.target.sort_asc.checked;
+        const sortDesc = event.target.sort_desc.checked;
+
+        console.log("value stored in sort_breed: ", sortBreed)
         
+        if((sortBreed === true) || (sortBreed === true && sortAsc === true)) {
+            let newUrl = new URL(resultsUrl);
+
+
+            newUrl.searchParams.set("sort", "breed:asc")
+            // console.log(newUrl.searchParams.set("sort", "breed:asc"));
+
+            console.log("New URL: ", newUrl.toString());
+            
+
+            fetch(`${newUrl.toString()}`, {
+                method: "GET",
+                credentials: "include",
+            })
+            .then((response) => {
+                setResultsUrl(response.url);
+                return response.json();
+                
+            })
+            .then((data) => {
+                setResultsData(data);
+                console.log("Results after sorting by breed and in ascending order", resultsData);
+            })
+        }
+
+        if((sortBreed === true && sortDesc === true)) {
+            let newUrl = new URL(resultsUrl);
+
+            newUrl.searchParams.set("sort", "breed:desc")
+
+            fetch(`${newUrl.toString()}`, {
+                method: "GET",
+                credentials: "include",
+            })
+            .then((response) => {
+                setResultsUrl(response.url);
+                return response.json();
+                
+            })
+            .then((data) => {
+                setResultsData(data);
+                console.log("Results after sorting by breed and in descending order", resultsData);
+            })
+
+        }
+
+        if((sortName === true) || (sortName === true && sortAsc === true)) {
+            let newUrl = new URL(resultsUrl);
+
+
+            newUrl.searchParams.set("sort", "name:asc")
+
+            console.log("New URL: ", newUrl.toString());
+            
+
+            fetch(`${newUrl.toString()}`, {
+                method: "GET",
+                credentials: "include",
+            })
+            .then((response) => {
+                setResultsUrl(response.url);
+                return response.json();
+                
+            })
+            .then((data) => {
+                setResultsData(data);
+                console.log("Results after sorting by name and in ascending order", resultsData);
+            })
+        }
+
+        if((sortName === true && sortDesc === true)) {
+            let newUrl = new URL(resultsUrl);
+
+            newUrl.searchParams.set("sort", "name:desc")
+
+            fetch(`${newUrl.toString()}`, {
+                method: "GET",
+                credentials: "include",
+            })
+            .then((response) => {
+                setResultsUrl(response.url);
+                return response.json();
+                
+            })
+            .then((data) => {
+                setResultsData(data);
+                console.log("Results after sorting by name and in descending order", resultsData);
+            })
+
+        }
+
+        if((sortAge === true) || (sortAge === true && sortAsc === true)) {
+            let newUrl = new URL(resultsUrl);
+
+
+            newUrl.searchParams.set("sort", "age:asc")
+
+            console.log("New URL: ", newUrl.toString());
+            
+
+            fetch(`${newUrl.toString()}`, {
+                method: "GET",
+                credentials: "include",
+            })
+            .then((response) => {
+                setResultsUrl(response.url);
+                return response.json();
+                
+            })
+            .then((data) => {
+                setResultsData(data);
+                console.log("Results after sorting by age and in ascending order", resultsData);
+            })
+        }
+
+        if((sortAge === true && sortDesc === true)) {
+            let newUrl = new URL(resultsUrl);
+
+            newUrl.searchParams.set("sort", "age:desc")
+
+            fetch(`${newUrl.toString()}`, {
+                method: "GET",
+                credentials: "include",
+            })
+            .then((response) => {
+                setResultsUrl(response.url);
+                return response.json();
+                
+            })
+            .then((data) => {
+                setResultsData(data);
+                console.log("Results after sorting by age and in descending order", resultsData);
+            })
+
+        }
+
+
     }
 
     
@@ -379,7 +593,7 @@ function Search() {
                     {dogDetails.map((dog, index) => {
                         return <li id="dog_li" key={index}>
                             <div id="li_div">
-                                <img src={dog["img"]}></img>
+                                <img src={dog["img"]} alt=""></img>
                                 <p>Name: {dog["name"]}</p>
                                 <p>Age: {dog["age"]}</p>
                                 <p>Breed: {dog["breed"]}</p>
