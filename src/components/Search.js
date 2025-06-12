@@ -2,6 +2,7 @@ import "./SearchStyle.css";
 import { useEffect, useState } from "react";
 
 
+
 function navigatePages(url) {
 
 }
@@ -17,8 +18,11 @@ function Search() {
 
     const [dogDetails, setDogDetails] = useState([]);
 
+    const [favsList, setFavsList] = useState([]);
+
     const [nextUrl, setNextUrl] = useState("");
     const [prevUrl, setPrevUrl] = useState("");
+
 
 
 
@@ -497,6 +501,22 @@ function Search() {
 
     }
 
+    const addToFavs = (event, idStr) => {
+
+        event.preventDefault();
+        console.log("Add to favs id: ", idStr);
+
+        if(favsList.includes(idStr)){
+
+            setFavsList((prev) => prev.filter((i) => i !== idStr));
+
+        } else {
+            setFavsList((prev) => [...prev, idStr]);
+
+        }
+
+    }
+
     
 
     //Hook that paginates results and sets the url for the next and previous pages
@@ -591,6 +611,8 @@ function Search() {
                 
                 <ul id="dog_list" type="none">
                     {dogDetails.map((dog, index) => {
+                        const isClicked = favsList.includes(dog["id"]);
+
                         return <li id="dog_li" key={index}>
                             <div id="li_div">
                                 <img src={dog["img"]} alt=""></img>
@@ -598,7 +620,9 @@ function Search() {
                                 <p>Age: {dog["age"]}</p>
                                 <p>Breed: {dog["breed"]}</p>
                                 <p>ZIP: {dog["zip_code"]}</p>
-                                <button id="li_btn">Add to Favorites</button>
+                                <button id="li_btn" onClick={(e) => addToFavs(e, dog["id"])}>
+                                    {isClicked ? "Remove" : "Add to Favorites"}
+                                    </button>
 
                             </div>
                         </li>
