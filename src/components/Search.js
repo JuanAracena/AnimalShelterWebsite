@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 
 
 
-function navigatePages(url) {
+// function navigatePages(url) {
+    
+//     console.log("navigatePages: ", url);
+    
 
-}
+// }
 
 function Search() {
 
@@ -342,6 +345,10 @@ function Search() {
                 })
             }
 
+            if(prevUrl) {
+                setPrevUrl("");
+            }
+
 
         }catch (error) {
             console.error("Error occurred while searching", error);
@@ -353,150 +360,156 @@ function Search() {
         event.preventDefault();
         console.log("Url that's going to be used to order the data: ", resultsUrl);
 
-        const sortBreed = event.target.sort_breed.checked;
-        const sortName = event.target.sort_name.checked;
-        const sortAge = event.target.sort_age.checked;
+        try {
+            const sortBreed = event.target.sort_breed.checked;
+            const sortName = event.target.sort_name.checked;
+            const sortAge = event.target.sort_age.checked;
 
-        const sortAsc = event.target.sort_asc.checked;
-        const sortDesc = event.target.sort_desc.checked;
+            const sortAsc = event.target.sort_asc.checked;
+            const sortDesc = event.target.sort_desc.checked;
 
-        console.log("value stored in sort_breed: ", sortBreed)
+            console.log("value stored in sort_breed: ", sortBreed)
+            
+            if((sortBreed === true) || (sortBreed === true && sortAsc === true)) {
+                let newUrl = new URL(resultsUrl);
+
+
+                newUrl.searchParams.set("sort", "breed:asc")
+                // console.log(newUrl.searchParams.set("sort", "breed:asc"));
+
+                console.log("New URL: ", newUrl.toString());
+                
+
+                fetch(`${newUrl.toString()}`, {
+                    method: "GET",
+                    credentials: "include",
+                })
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
+                .then((data) => {
+                    setResultsData(data);
+                    console.log("Results after sorting by breed and in ascending order", resultsData);
+                })
+            }
+
+            if((sortBreed === true && sortDesc === true)) {
+                let newUrl = new URL(resultsUrl);
+
+                newUrl.searchParams.set("sort", "breed:desc")
+
+                fetch(`${newUrl.toString()}`, {
+                    method: "GET",
+                    credentials: "include",
+                })
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
+                .then((data) => {
+                    setResultsData(data);
+                    console.log("Results after sorting by breed and in descending order", resultsData);
+                })
+
+            }
+
+            if((sortName === true) || (sortName === true && sortAsc === true)) {
+                let newUrl = new URL(resultsUrl);
+
+
+                newUrl.searchParams.set("sort", "name:asc")
+
+                console.log("New URL: ", newUrl.toString());
+                
+
+                fetch(`${newUrl.toString()}`, {
+                    method: "GET",
+                    credentials: "include",
+                })
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
+                .then((data) => {
+                    setResultsData(data);
+                    console.log("Results after sorting by name and in ascending order", resultsData);
+                })
+            }
+
+            if((sortName === true && sortDesc === true)) {
+                let newUrl = new URL(resultsUrl);
+
+                newUrl.searchParams.set("sort", "name:desc")
+
+                fetch(`${newUrl.toString()}`, {
+                    method: "GET",
+                    credentials: "include",
+                })
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
+                .then((data) => {
+                    setResultsData(data);
+                    console.log("Results after sorting by name and in descending order", resultsData);
+                })
+
+            }
+
+            if((sortAge === true) || (sortAge === true && sortAsc === true)) {
+                let newUrl = new URL(resultsUrl);
+
+
+                newUrl.searchParams.set("sort", "age:asc")
+
+                console.log("New URL: ", newUrl.toString());
+                
+
+                fetch(`${newUrl.toString()}`, {
+                    method: "GET",
+                    credentials: "include",
+                })
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
+                .then((data) => {
+                    setResultsData(data);
+                    console.log("Results after sorting by age and in ascending order", resultsData);
+                })
+            }
+
+            if((sortAge === true && sortDesc === true)) {
+                let newUrl = new URL(resultsUrl);
+
+                newUrl.searchParams.set("sort", "age:desc")
+
+                fetch(`${newUrl.toString()}`, {
+                    method: "GET",
+                    credentials: "include",
+                })
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
+                .then((data) => {
+                    setResultsData(data);
+                    console.log("Results after sorting by age and in descending order", resultsData);
+                })
+
+            }
+
+        }catch(error) {
+            console.error("Error occurred while sorting results", error);
+        }
         
-        if((sortBreed === true) || (sortBreed === true && sortAsc === true)) {
-            let newUrl = new URL(resultsUrl);
-
-
-            newUrl.searchParams.set("sort", "breed:asc")
-            // console.log(newUrl.searchParams.set("sort", "breed:asc"));
-
-            console.log("New URL: ", newUrl.toString());
-            
-
-            fetch(`${newUrl.toString()}`, {
-                method: "GET",
-                credentials: "include",
-            })
-            .then((response) => {
-                setResultsUrl(response.url);
-                return response.json();
-                
-            })
-            .then((data) => {
-                setResultsData(data);
-                console.log("Results after sorting by breed and in ascending order", resultsData);
-            })
-        }
-
-        if((sortBreed === true && sortDesc === true)) {
-            let newUrl = new URL(resultsUrl);
-
-            newUrl.searchParams.set("sort", "breed:desc")
-
-            fetch(`${newUrl.toString()}`, {
-                method: "GET",
-                credentials: "include",
-            })
-            .then((response) => {
-                setResultsUrl(response.url);
-                return response.json();
-                
-            })
-            .then((data) => {
-                setResultsData(data);
-                console.log("Results after sorting by breed and in descending order", resultsData);
-            })
-
-        }
-
-        if((sortName === true) || (sortName === true && sortAsc === true)) {
-            let newUrl = new URL(resultsUrl);
-
-
-            newUrl.searchParams.set("sort", "name:asc")
-
-            console.log("New URL: ", newUrl.toString());
-            
-
-            fetch(`${newUrl.toString()}`, {
-                method: "GET",
-                credentials: "include",
-            })
-            .then((response) => {
-                setResultsUrl(response.url);
-                return response.json();
-                
-            })
-            .then((data) => {
-                setResultsData(data);
-                console.log("Results after sorting by name and in ascending order", resultsData);
-            })
-        }
-
-        if((sortName === true && sortDesc === true)) {
-            let newUrl = new URL(resultsUrl);
-
-            newUrl.searchParams.set("sort", "name:desc")
-
-            fetch(`${newUrl.toString()}`, {
-                method: "GET",
-                credentials: "include",
-            })
-            .then((response) => {
-                setResultsUrl(response.url);
-                return response.json();
-                
-            })
-            .then((data) => {
-                setResultsData(data);
-                console.log("Results after sorting by name and in descending order", resultsData);
-            })
-
-        }
-
-        if((sortAge === true) || (sortAge === true && sortAsc === true)) {
-            let newUrl = new URL(resultsUrl);
-
-
-            newUrl.searchParams.set("sort", "age:asc")
-
-            console.log("New URL: ", newUrl.toString());
-            
-
-            fetch(`${newUrl.toString()}`, {
-                method: "GET",
-                credentials: "include",
-            })
-            .then((response) => {
-                setResultsUrl(response.url);
-                return response.json();
-                
-            })
-            .then((data) => {
-                setResultsData(data);
-                console.log("Results after sorting by age and in ascending order", resultsData);
-            })
-        }
-
-        if((sortAge === true && sortDesc === true)) {
-            let newUrl = new URL(resultsUrl);
-
-            newUrl.searchParams.set("sort", "age:desc")
-
-            fetch(`${newUrl.toString()}`, {
-                method: "GET",
-                credentials: "include",
-            })
-            .then((response) => {
-                setResultsUrl(response.url);
-                return response.json();
-                
-            })
-            .then((data) => {
-                setResultsData(data);
-                console.log("Results after sorting by age and in descending order", resultsData);
-            })
-
-        }
 
 
     }
@@ -514,6 +527,41 @@ function Search() {
             setFavsList((prev) => [...prev, idStr]);
 
         }
+
+    }
+
+    const navigatePages = (url) => {
+        console.log("navigatePages: ", url);
+
+        // setResultsUrl(url);
+
+        try {
+            if(!prevUrl) {
+                console.log("There isn't a previous page");
+            }else {
+                fetch(`${url}`, {
+                    method: "GET",
+                    credentials: "include",
+
+                })
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results after clicking previous or next: ", resultsData);
+
+                })
+            }
+
+            
+        }catch (error) {
+            console.error("Error occurred while navigating pages", error);
+        }
+            
+
 
     }
 
@@ -632,8 +680,8 @@ function Search() {
 
             <div id="btn_div">
                 <ul id="btn_ul">
-                    <button id="next_btn" onClick={navigatePages(nextUrl)}>Next</button>
-                    <button id="prev_btn" onClick={navigatePages(prevUrl)}>Previous</button>
+                    <button id="prev_btn" onClick={() => navigatePages(prevUrl)}>Previous</button>
+                    <button id="next_btn" onClick={() => navigatePages(nextUrl)}>Next</button>
                 </ul>
             </div>
 
