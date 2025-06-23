@@ -2,14 +2,6 @@ import "./SearchStyle.css";
 import { useEffect, useState } from "react";
 
 
-
-// function navigatePages(url) {
-    
-//     console.log("navigatePages: ", url);
-    
-
-// }
-
 function Search() {
 
     //State for displaying the breed options
@@ -22,9 +14,15 @@ function Search() {
     const [dogDetails, setDogDetails] = useState([]);
 
     const [favsList, setFavsList] = useState([]);
+    const [isFavsEnabled, setFavsEnabled] = useState(false);
 
     const [nextUrl, setNextUrl] = useState("");
     const [prevUrl, setPrevUrl] = useState("");
+
+    const [startIndex, setStartIndex] = useState(0);
+    const [endIndex, setEndIndex] = useState(25);
+
+    const [isPrevEnabled, setPrevEnabled] = useState(false);
 
 
 
@@ -66,6 +64,15 @@ function Search() {
         
 
     }, [])
+
+    useEffect(() => {
+
+        console.log("Length: :", (favsList.length));
+        console.log(favsList);
+        if(favsList.length === 0){
+                setFavsEnabled(false);
+        }
+    }, [favsList]);
 
     const handleSearch = (event) => {
         event.preventDefault();
@@ -349,6 +356,9 @@ function Search() {
                 setPrevUrl("");
             }
 
+            setStartIndex(0);
+            setEndIndex(25);
+
 
         }catch (error) {
             console.error("Error occurred while searching", error);
@@ -523,20 +533,64 @@ function Search() {
 
             setFavsList((prev) => prev.filter((i) => i !== idStr));
 
+            
+
         } else {
             setFavsList((prev) => [...prev, idStr]);
+            setFavsEnabled(true);
 
         }
 
     }
 
-    const navigatePages = (url) => {
+    const navigateNextPage = (url) => {
+        console.log("navigateNextPage: ", url);
+
+        
+        try {
+            fetch(`${url}`, {
+                method: "GET",
+                credentials: "include",
+
+            })
+            .then((response) => {
+                setResultsUrl(response.url);
+                return response.json();
+                
+            })
+            .then((data) => {                    
+                setResultsData(data);
+                console.log("Results after clicking next: ", resultsData);
+
+            })
+
+            
+            let currUrl = new URL(url);
+            console.log("Current initial index: ", currUrl.searchParams.get("from"));
+            setStartIndex(currUrl.searchParams.get("from"));
+
+            let newEndIndex = Number(currUrl.searchParams.get("from"));
+            newEndIndex += 25;
+
+            setEndIndex(newEndIndex.toString());
+
+            setPrevEnabled(true);
+
+        } catch(error) {
+            console.error("Error occurred while navigating to the next page: ", error);
+        }
+        
+
+    }
+
+
+    const navigatePrevPage = (url) => {
         console.log("navigatePages: ", url);
 
-        // setResultsUrl(url);
-
         try {
-            if(!prevUrl) {
+            if(!prevUrl || startIndex === "0") {
+                alert("You're on the first page");
+                setPrevEnabled(false);
                 console.log("There isn't a previous page");
             }else {
                 fetch(`${url}`, {
@@ -556,9 +610,21 @@ function Search() {
                 })
             }
 
+            let currUrl = new URL(url);
+            
+
+            setStartIndex(currUrl.searchParams.get("from"));
+
+            let newEndIndex = Number(endIndex);
+            console.log("Number: ", newEndIndex);
+            if(newEndIndex !== 25) {
+                newEndIndex -= 25;
+            }
+            setEndIndex(newEndIndex.toString());
+            
             
         }catch (error) {
-            console.error("Error occurred while navigating pages", error);
+            console.error("Error occurred while navigating to the previous page: ", error);
         }
             
 
@@ -607,6 +673,10 @@ function Search() {
     console.log("Decoded Ids: ", dogDetails);
     console.log("NextURL value: ", nextUrl);
     console.log("PrevURL value: ", prevUrl);
+
+    const handleNextClick = () => {
+        setPrevEnabled(true);
+    }
 
     return (
         <div id="search_bg">
@@ -680,13 +750,18 @@ function Search() {
 
             <div id="btn_div">
                 <ul id="btn_ul">
-                    <button id="prev_btn" onClick={() => navigatePages(prevUrl)}>Previous</button>
-                    <button id="next_btn" onClick={() => navigatePages(nextUrl)}>Next</button>
+                    <button id="prev_btn" disabled={!isPrevEnabled} onClick={() => navigatePrevPage(prevUrl)}>Previous</button>
+                    <p id="index">{startIndex} - {endIndex} of {resultsData ? resultsData["total"] : ""}</p>
+                    <button id="next_btn" onClick={() => {
+                        navigateNextPage(nextUrl);
+                        handleNextClick();
+
+                    }}>Next</button>
                 </ul>
             </div>
 
             <div id="match_div">
-                <button id="match_btn">Find your Match</button>
+                <button id="match_btn" disabled={!isFavsEnabled}>Find your Match</button>
             </div>
 
             <div id="links">

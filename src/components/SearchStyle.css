@@ -146,7 +146,7 @@
 #btn_ul {
     list-style: none;
     display: grid;
-    grid-template-columns: 80px 80px;
+    grid-template-columns: 80px 99px 80px;
     grid-gap: 20px;
     justify-content: end;
     margin-right: 20px;
