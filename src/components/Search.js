@@ -1,5 +1,6 @@
 import "./SearchStyle.css";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 function Search() {
@@ -23,6 +24,8 @@ function Search() {
     const [endIndex, setEndIndex] = useState(25);
 
     const [isPrevEnabled, setPrevEnabled] = useState(false);
+
+    const navigate = useNavigate();
 
 
 
@@ -678,6 +681,18 @@ function Search() {
         setPrevEnabled(true);
     }
 
+
+    //This needs to be an useEffect hook!
+    const findMatch = (event) => {
+        
+        event.preventDefault();
+
+        console.log("Favs List: ", favsList);
+
+        navigate("/match", {state: {list: favsList} });
+        
+    }
+
     return (
         <div id="search_bg">
             <div id="logo_div">
@@ -761,7 +776,7 @@ function Search() {
             </div>
 
             <div id="match_div">
-                <button id="match_btn" disabled={!isFavsEnabled}>Find your Match</button>
+                <button id="match_btn" disabled={!isFavsEnabled} onClick={findMatch}>Find your Match</button>
             </div>
 
             <div id="links">

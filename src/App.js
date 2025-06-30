@@ -1,9 +1,9 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 import Login from "./components/Login";
 import Search from "./components/Search";
+import Match from "./components/Match";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 
 function App() {
@@ -12,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/match" element={<Match />} />
       </Routes>
     </BrowserRouter>
   );
