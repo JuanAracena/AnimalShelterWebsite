@@ -8,6 +8,7 @@ function Match() {
     const { list } = location.state || {};
 
     const [matchId, setMatchId] = useState("");
+    const [matchData, setMatchData] = useState([]);
 
     //API call that matches a dog from the list with the user
 
@@ -41,8 +42,45 @@ function Match() {
         }
 
         fetchData();
-        
+        // eslint-disable-next-line
     }, []);
+
+    useEffect(() => {
+        const fetchData = () => {
+            try {
+                let dog = JSON.stringify([matchId]);
+                //console.log("Dog: ", dog);
+
+                fetch(`https://frontend-take-home-service.fetch.com/dogs/`, {
+                    method: "POST",
+                    credentials: "include",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: dog
+        
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    setMatchData(data);
+                })
+                .catch((error) => console.error("Error fetching details of match", error));
+                
+
+            } catch(error) {
+                console.error("Error occured while fetching details: ", error);
+            }
+        }
+
+        fetchData();
+
+    }, [matchId]);
+
+    useEffect(() => {
+        if(matchData) {
+            console.log("matchData updated:", matchData);
+        }
+    }, [matchData]);
 
     return (
         <div id="match_bg">
@@ -52,9 +90,18 @@ function Match() {
             <div id="match_div">
                 <h1 id="match_title">Your match is:</h1>
                 <p>Match ID: {matchId}</p>
+                {matchData.map((dog, index) => {
+                return <li id="match_li" key={index}>
+                    <div id="match_list">
+                        <img src={dog["img"]} alt=""></img>
+                        <p>Name: {dog["name"]}</p>
+                        <p>Age: {dog["age"]}</p>
+                        <p>Breed: {dog["breed"]}</p>
+                        <p>ZIP: {dog["zip_code"]}</p>
+                    </div>
+                </li>
+                })}
                 
-                
-
             </div>
         </div>
     )
