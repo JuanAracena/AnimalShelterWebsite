@@ -1,0 +1,31 @@
+#match_bg {
+    background-color: beige;
+    display: grid;
+    grid-template-rows: 75px auto 100px;
+}
+
+#final_match_div {
+    place-self: center;
+    display: grid;
+    grid-template-rows: 50px auto;
+    background-color: aquamarine;
+    width: 80%;
+    border-radius: 20px;
+}
+
+#match_title {
+    margin-left: 20px;
+}
+
+#match_list {
+    display: grid;
+    grid-template-columns: 228px auto;
+    grid-template-rows: 25px 25px 25px 25px 38px;
+}
+
+#match_list img {
+    grid-row-start: 1;
+    grid-row-end: 6;
+    border-radius: 20px;
+    justify-self: center;
+}

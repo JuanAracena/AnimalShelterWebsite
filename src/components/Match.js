@@ -87,21 +87,26 @@ function Match() {
             <div id="logo_div">
                 <img id="logo" src="design.png" alt="Fetch company logo"></img>
             </div>
-            <div id="match_div">
+            <div id="final_match_div">
                 <h1 id="match_title">Your match is:</h1>
-                <p>Match ID: {matchId}</p>
-                {matchData.map((dog, index) => {
-                return <li id="match_li" key={index}>
-                    <div id="match_list">
-                        <img src={dog["img"]} alt=""></img>
-                        <p>Name: {dog["name"]}</p>
-                        <p>Age: {dog["age"]}</p>
-                        <p>Breed: {dog["breed"]}</p>
-                        <p>ZIP: {dog["zip_code"]}</p>
-                    </div>
-                </li>
-                })}
-                
+                <ul id="match_ul" type="none">
+                    {matchData.map((dog, index) => {
+                    return <li id="match_li" key={index}>
+                        <div id="match_list">
+                            <img src={dog["img"]} alt=""></img>
+                            <p>Name: {dog["name"]}</p>
+                            <p>Age: {dog["age"]}</p>
+                            <p>Breed: {dog["breed"]}</p>
+                            <p>ZIP: {dog["zip_code"]}</p>
+                        </div>
+                    </li>
+                    })}
+                </ul>
+            </div>
+            <div id="links">
+                <a id="blog" href="https://fetch.com/blog">Blog   </a>{"|"}
+                <a id="contact" href="https://help.fetch.com/hc/en-us">  Contact Support   </a>{"|"}
+                <a id="news" href="https://business.fetch.com/newsroom">  Newsroom</a>
             </div>
         </div>
     )
