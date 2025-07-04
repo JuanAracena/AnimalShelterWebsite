@@ -10,6 +10,8 @@ This project is a website capable of matching users with shelter dogs based on t
   - **Styling**: CSS
 ### Tools and Software
   - **Version Control**: Git
+  - **API Development Tool**: Postman
+  - **Hosting Platform**: Vercel
 
 ## How to Run Locally
 1. Open VS Code or your IDE of choice.
