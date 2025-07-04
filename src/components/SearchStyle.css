@@ -171,6 +171,13 @@
     margin-top: 18px;
 }
 
+#log_out {
+    place-self: center end;
+    height: 30px;
+    width: 80px;
+    margin-right: 20px;
+}
+
 label {
     font-family: Arial, Helvetica, sans-serif;
 

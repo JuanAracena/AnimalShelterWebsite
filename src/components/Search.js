@@ -682,7 +682,6 @@ function Search() {
     }
 
 
-    //This needs to be an useEffect hook!
     const findMatch = (event) => {
         
         event.preventDefault();
@@ -693,10 +692,35 @@ function Search() {
         
     }
 
+    const handleLogout = (event) => {
+        event.preventDefault();
+
+        try {
+            fetch(`https://frontend-take-home-service.fetch.com/auth/logout`, {
+                method: "POST",
+                credentials: "include"
+            })
+            .catch((error) => console.error("Error fetching auth token: ", error)
+            );
+
+            console.log("Logged out successfully");
+
+            navigate("/");
+
+        } catch(error){
+            console.error("Error occured while signing out: ", error);
+        }
+
+
+        
+        
+    }
+
     return (
         <div id="search_bg">
             <div id="logo_div">
                 <img id="logo" src="design.png" alt="Fetch company logo"></img>
+                <button id="log_out" onClick={handleLogout}>Logout</button>
             </div>
             <div id="filter_div">
                 <h1 id="filter_title">Filters</h1>

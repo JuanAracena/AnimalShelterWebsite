@@ -1,15 +1,19 @@
 #match_bg {
     background-color: beige;
     display: grid;
-    grid-template-rows: 75px auto 100px;
+    grid-template-rows: 75px auto 50px 100px;
 }
 
 #final_match_div {
     place-self: center;
     display: grid;
     grid-template-rows: 50px auto;
-    background-color: aquamarine;
-    width: 80%;
+    background-color: #ECE7CA;
+    width: fit-content;
+    height: fit-content;
+    padding-bottom: 25px;
+    padding-top: 10px;
+    padding-right: 40px;
     border-radius: 20px;
 }
 
@@ -28,4 +32,14 @@
     grid-row-end: 6;
     border-radius: 20px;
     justify-self: center;
+}
+
+#btn_div {
+    place-self: center;
+}
+
+#back_btn {
+    width: fit-content;
+    padding-right: 10px;
+    padding-left: 10px;
 }

@@ -48,6 +48,8 @@
 
 #logo_div {
     height: fit-content;
+    display: grid;
+    grid-template-columns: fit-content(85px) auto;
 }
 
 #logo {

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./MatchStyle.css";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Match() {
 
@@ -9,6 +10,8 @@ function Match() {
 
     const [matchId, setMatchId] = useState("");
     const [matchData, setMatchData] = useState([]);
+
+    const navigate = useNavigate();
 
     //API call that matches a dog from the list with the user
 
@@ -46,7 +49,11 @@ function Match() {
     }, []);
 
     useEffect(() => {
-        const fetchData = () => {
+        if (!matchId) {
+            return;
+        }
+        
+        const fetchDetails = () => {
             try {
                 let dog = JSON.stringify([matchId]);
                 //console.log("Dog: ", dog);
@@ -72,7 +79,7 @@ function Match() {
             }
         }
 
-        fetchData();
+        fetchDetails();
 
     }, [matchId]);
 
@@ -82,10 +89,40 @@ function Match() {
         }
     }, [matchData]);
 
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        navigate("/search");
+
+    }
+
+    const handleLogout = (event) => {
+        event.preventDefault();
+
+        try {
+            fetch(`https://frontend-take-home-service.fetch.com/auth/logout`, {
+                method: "POST",
+                credentials: "include"
+            })
+            .catch((error) => console.error("Error fetching auth token: ", error)
+            );
+
+            console.log("Logged out successfully");
+            navigate("/");
+
+        } catch(error){
+            console.error("Error occured while signing out: ", error);
+        }
+
+        
+        
+    }
+
     return (
         <div id="match_bg">
             <div id="logo_div">
                 <img id="logo" src="design.png" alt="Fetch company logo"></img>
+                <button id="log_out" onClick={handleLogout}>Logout</button>
             </div>
             <div id="final_match_div">
                 <h1 id="match_title">Your match is:</h1>
@@ -102,6 +139,9 @@ function Match() {
                     </li>
                     })}
                 </ul>
+            </div>
+            <div id="btn_div">
+                <button id="back_btn" onClick={handleSubmit}>Go Back</button>
             </div>
             <div id="links">
                 <a id="blog" href="https://fetch.com/blog">Blog   </a>{"|"}
