@@ -24,6 +24,7 @@ function Search() {
     const [endIndex, setEndIndex] = useState(25);
 
     const [isPrevEnabled, setPrevEnabled] = useState(false);
+    const [isNextEnabled, setNextEnabled] = useState(false);
 
     const navigate = useNavigate();
 
@@ -361,6 +362,7 @@ function Search() {
 
             setStartIndex(0);
             setEndIndex(25);
+            setNextEnabled(true);
 
 
         }catch (error) {
@@ -549,41 +551,46 @@ function Search() {
     const navigateNextPage = (url) => {
         console.log("navigateNextPage: ", url);
 
+        if(endIndex > resultsData["total"]) {
+            alert("You're on the last page");
+            setNextEnabled(false);
+
+        } else {
         
-        try {
-            fetch(`${url}`, {
-                method: "GET",
-                credentials: "include",
+            try {
+                fetch(`${url}`, {
+                    method: "GET",
+                    credentials: "include",
 
-            })
-            .then((response) => {
-                setResultsUrl(response.url);
-                return response.json();
+                })
+                .then((response) => {
+                    setResultsUrl(response.url);
+                    return response.json();
+                    
+                })
+                .then((data) => {                    
+                    setResultsData(data);
+                    console.log("Results after clicking next: ", resultsData);
+
+                })
+
                 
-            })
-            .then((data) => {                    
-                setResultsData(data);
-                console.log("Results after clicking next: ", resultsData);
+                let currUrl = new URL(url);
+                console.log("Current initial index: ", currUrl.searchParams.get("from"));
+                setStartIndex(currUrl.searchParams.get("from"));
 
-            })
+                let newEndIndex = Number(currUrl.searchParams.get("from"));
+                newEndIndex += 25;
 
-            
-            let currUrl = new URL(url);
-            console.log("Current initial index: ", currUrl.searchParams.get("from"));
-            setStartIndex(currUrl.searchParams.get("from"));
+                setEndIndex(newEndIndex.toString());
 
-            let newEndIndex = Number(currUrl.searchParams.get("from"));
-            newEndIndex += 25;
+                setPrevEnabled(true);
 
-            setEndIndex(newEndIndex.toString());
-
-            setPrevEnabled(true);
-
-        } catch(error) {
-            console.error("Error occurred while navigating to the next page: ", error);
+            } catch(error) {
+                console.error("Error occurred while navigating to the next page: ", error);
+            }
         }
         
-
     }
 
 
@@ -624,6 +631,8 @@ function Search() {
                 newEndIndex -= 25;
             }
             setEndIndex(newEndIndex.toString());
+
+            setNextEnabled(true);
             
             
         }catch (error) {
@@ -791,7 +800,7 @@ function Search() {
                 <ul id="btn_ul">
                     <button id="prev_btn" disabled={!isPrevEnabled} onClick={() => navigatePrevPage(prevUrl)}>Previous</button>
                     <p id="index">{startIndex} - {endIndex} of {resultsData ? resultsData["total"] : ""}</p>
-                    <button id="next_btn" onClick={() => {
+                    <button id="next_btn" disabled={!isNextEnabled} onClick={() => {
                         navigateNextPage(nextUrl);
                         handleNextClick();
 
